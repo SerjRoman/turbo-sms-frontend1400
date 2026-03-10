@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
 		borderRadius: 16,
 		backgroundColor: COLORS.bisquePrimary,
 		flexDirection: "row",
+		alignItems: "center"
 	},
 	input: {
 		flex: 1,

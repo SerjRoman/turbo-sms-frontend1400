@@ -9,6 +9,7 @@ export function EyeClosedIcon(props: SvgProps) {
 				strokeWidth={3}
 				strokeLinecap="round"
 				strokeLinejoin="round"
+				fill="none"
 			/>
 		</Svg>
 	);

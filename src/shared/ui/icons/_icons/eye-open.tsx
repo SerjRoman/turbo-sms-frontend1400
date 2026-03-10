@@ -9,6 +9,7 @@ export function EyeOpenIcon(props: SvgProps) {
 				strokeWidth={3}
 				strokeLinecap="round"
 				strokeLinejoin="round"
+				fill="none"
 			/>
 			<Path
 				d="M16 16.167a4 4 0 100-8 4 4 0 000 8z"
@@ -16,6 +17,7 @@ export function EyeOpenIcon(props: SvgProps) {
 				strokeWidth={3}
 				strokeLinecap="round"
 				strokeLinejoin="round"
+				fill="none"
 			/>
 		</Svg>
 	);

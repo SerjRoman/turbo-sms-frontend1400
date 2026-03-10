@@ -1,15 +1,18 @@
-import { Input } from "@shared/ui/input";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-
+import { AdditionalLinks, LoginForm, WelcomeBlock } from "@modules/auth";
+import { StyleSheet } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 export default function App() {
 	return (
-		<View style={styles.container}>
-			<Text>Open up App.tsx to start working on your app!</Text>
-			<StatusBar style="auto" />
-			<Input />
-			<Input.Password />
-		</View>
+		<SafeAreaProvider>
+			<SafeAreaView style={styles.container}>
+				<WelcomeBlock />
+				<LoginForm />
+				<AdditionalLinks
+					text="Don't have an account? "
+					linkText="Register now!"
+				/>
+			</SafeAreaView>
+		</SafeAreaProvider>
 	);
 }
 
@@ -17,7 +20,5 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center",
 	},
 });
