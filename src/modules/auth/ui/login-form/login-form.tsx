@@ -2,16 +2,16 @@ import { View } from "react-native";
 import { styles } from "./login-form.styles";
 import { Button, ICONS, Input } from "@shared/ui";
 import { Controller, useForm } from "react-hook-form";
-import type { LoginForm } from "./login.types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginValidator } from "../../models/lib/login.valdation";
+import { loginValidator } from "../../models/validators";
+import { type LoginSchema } from "../../models/types";
 
 export function LoginForm() {
-	const { handleSubmit, control } = useForm<LoginForm>({
+	const { handleSubmit, control } = useForm<LoginSchema>({
 		resolver: yupResolver(loginValidator),
 		mode: "onChange",
 	});
-	function onSubmit(data: LoginForm) {
+	function onSubmit(data: LoginSchema) {
 		console.log(data);
 	}
 
@@ -35,6 +35,7 @@ export function LoginForm() {
 								value={field.value}
 								iconLeft={<ICONS.MailIcon />}
 								label="Email"
+								error={fieldState.error?.message}
 							/>
 						);
 					}}
@@ -55,6 +56,7 @@ export function LoginForm() {
 								label="Password"
 								onChangeText={field.onChange}
 								value={field.value}
+								error={fieldState.error?.message}
 							/>
 						);
 					}}

@@ -5,5 +5,8 @@ export const loginValidator = yup.object({
 		.string()
 		.required("This field is required")
 		.email("Field must be email"),
-	password: yup.string().required("This field is required").min(8, "Min length > 8"),
+	password: yup
+		.string()
+		.required("This field is required")
+		.min(8, "Min length > 8"),
 });

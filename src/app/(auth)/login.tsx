@@ -10,7 +10,7 @@ export default function Login() {
 			<AdditionalLinks
 				text="Don't have an account? "
 				linkText="Register now!"
-				link={"/register"}
+				link={"/register/step-one"}
 			/>
 		</SafeAreaView>
 	);

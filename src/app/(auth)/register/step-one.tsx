@@ -1,16 +1,16 @@
-import { AdditionalLinks, LoginForm, WelcomeBlock } from "@modules/auth";
-import { StyleSheet, Text } from "react-native";
+import { AdditionalLinks, RegisterForm, WelcomeBlock } from "@modules/auth";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Login() {
+export default function StepOne() {
 	return (
 		<SafeAreaView style={styles.container}>
 			<WelcomeBlock />
-            <Text>Register now</Text>
+			<RegisterForm.StepOne />
 			<AdditionalLinks
-				text="Already have an account?"
+				text="Already have an account? "
 				linkText="Login now!"
-                link={"/login"}
+				link={"/login"}
 			/>
 		</SafeAreaView>
 	);
