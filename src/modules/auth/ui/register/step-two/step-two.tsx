@@ -1,11 +1,13 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { type RegisterStepTwoSchema } from "../../../models/types";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { Input, ICONS, Button } from "@shared/ui";
 import { registerValidators } from "../../../models/validators";
 import { styles } from "./step-two.styles";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { Image } from "expo-image";
+import { pickImage } from "@shared/tools/pick-image";
 
 export function StepTwo() {
 	const params = useLocalSearchParams();
@@ -42,8 +44,7 @@ export function StepTwo() {
 								style={styles.input}
 								onChangeText={field.onChange}
 								value={field.value}
-								iconLeft={<ICONS.MailIcon />}
-								label="Email"
+								label="Name"
 							/>
 						);
 					}}
@@ -63,8 +64,7 @@ export function StepTwo() {
 								style={styles.input}
 								onChangeText={field.onChange}
 								value={field.value}
-								iconLeft={<ICONS.MailIcon />}
-								label="Username"
+								label="Surname"
 							/>
 						);
 					}}
@@ -73,7 +73,51 @@ export function StepTwo() {
 					name="avatar"
 					control={control}
 					render={({ field, fieldState }) => {
-						return <View></View>;
+						return (
+							<View style={styles.selectAvatarBlock}>
+								<TouchableOpacity
+									style={styles.selectAvatarButton}
+									onPress={async () => {
+										const assets = await pickImage(false, {
+											selectionLimit: 1,
+											allowsMultipleSelection: false,
+											allowsEditing: false,
+											mediaTypes: ["images"],
+										});
+										if (assets.status === "error") {
+											Alert.alert(
+												"Error occured",
+												assets.message,
+											);
+											return;
+										}
+										const image = assets.assets[0];
+										field.onChange(image.uri);
+									}}
+								>
+									<Image
+										style={styles.selectAvatarImage}
+										placeholder={require("@assets/default-user.png")}
+										placeholderContentFit="cover"
+										contentFit="cover"
+										source={{
+											uri: field.value || undefined,
+										}}
+									/>
+									{!field.value && (
+										<View style={styles.iconContainer}>
+											<ICONS.SearchIcon
+												width="100%"
+												height="100%"
+											/>
+										</View>
+									)}
+								</TouchableOpacity>
+								<Text style={styles.selectAvatarLabel}>
+									Select avatar
+								</Text>
+							</View>
+						);
 					}}
 				/>
 			</View>

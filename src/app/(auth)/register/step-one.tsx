@@ -1,17 +1,25 @@
 import { AdditionalLinks, RegisterForm, WelcomeBlock } from "@modules/auth";
 import { StyleSheet } from "react-native";
+import {
+	KeyboardAvoidingView,
+	KeyboardAwareScrollView,
+} from "react-native-keyboard-controller";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StepOne() {
 	return (
 		<SafeAreaView style={styles.container}>
-			<WelcomeBlock />
-			<RegisterForm.StepOne />
-			<AdditionalLinks
-				text="Already have an account? "
-				linkText="Login now!"
-				link={"/login"}
-			/>
+			<KeyboardAwareScrollView
+				contentContainerStyle={{ flexGrow: 1 }}
+			>
+				<WelcomeBlock />
+				<RegisterForm.StepOne />
+				<AdditionalLinks
+					text="Already have an account? "
+					linkText="Login now!"
+					link={"/login"}
+				/>
+			</KeyboardAwareScrollView>
 		</SafeAreaView>
 	);
 }
