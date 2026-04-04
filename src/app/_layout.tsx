@@ -1,3 +1,5 @@
+import { ApiProvider } from "@reduxjs/toolkit/query/react";
+import { baseApi } from "@shared/api/base-api";
 import { Stack } from "expo-router";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -6,16 +8,18 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 export default function RootLayout() {
 	return (
 		<SafeAreaProvider>
-			<KeyboardProvider>
-				<Stack
-					screenOptions={{
-						headerShown: false,
-					}}
-				>
-					<Stack.Screen name="index" />
-					<Stack.Screen name="(auth)" />
-				</Stack>
-			</KeyboardProvider>
+			<ApiProvider api={baseApi}>
+				<KeyboardProvider>
+					<Stack
+						screenOptions={{
+							headerShown: false,
+						}}
+					>
+						<Stack.Screen name="index" />
+						<Stack.Screen name="(auth)" />
+					</Stack>
+				</KeyboardProvider>
+			</ApiProvider>
 		</SafeAreaProvider>
 	);
 }
