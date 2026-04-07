@@ -1,28 +1,41 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
-import { type RegisterStepTwoSchema } from "../../../models/types";
+import {
+	RegisterStepOneSchema,
+	type RegisterStepTwoSchema,
+} from "../../../models/types";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { Input, ICONS, Button } from "@shared/ui";
 import { registerValidators } from "../../../models/validators";
 import { styles } from "./step-two.styles";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Image } from "expo-image";
+import { useRegisterMutation } from "../../../api";
 import { pickImage } from "@shared/tools/pick-image";
+import { useUserContext } from "../../../context/user.context";
 
 export function StepTwo() {
-	const params = useLocalSearchParams();
+	const { setToken } = useUserContext();
+	const [registerMutation] = useRegisterMutation();
+	const params = useLocalSearchParams<RegisterStepOneSchema>();
 	const { handleSubmit, control } = useForm({
 		// Если в валидации есть опциональные поля, то yupResolver будет криво с ними работать,
 		// поэтому НЕ указываем типизацию generic`ом для useForm
 		resolver: yupResolver(registerValidators.stepTwo),
 		mode: "onChange",
 	});
-	function onSubmit(data: RegisterStepTwoSchema) {
+
+	async function onSubmit(data: RegisterStepTwoSchema) {
 		const finalData = {
 			...params,
 			...data,
 		};
-		console.log(finalData);
+		try {
+			const response = await registerMutation(finalData).unwrap();
+			setToken(response.token);
+		} catch (error) {
+			console.log(error);
+		}
 	}
 	const router = useRouter();
 
