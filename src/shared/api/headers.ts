@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const queryHeaders = async (headers: Headers) => {
 	const token = await AsyncStorage.getItem("token");
+	console.log("HEADERS", token);
 	if (token) {
 		headers.set("Authorization", `Bearer ${token}`);
 	}

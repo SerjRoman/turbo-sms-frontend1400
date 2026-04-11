@@ -19,6 +19,7 @@ export function LoginForm() {
 		try {
 			const response = await loginMutation(data).unwrap();
 			setToken(response.token);
+			console.log(response.token);
 		} catch (error) {
 			console.log(error);
 		}

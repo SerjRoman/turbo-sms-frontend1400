@@ -1,5 +1,5 @@
 import { UserContextProvider, useUserContext } from "@modules/auth";
-import { useMeQuery } from "@modules/auth/api";
+import { useLazyMeQuery, useMeQuery } from "@modules/auth/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ApiProvider } from "@reduxjs/toolkit/query/react";
 import { baseApi } from "@shared/api/base-api";
@@ -7,7 +7,6 @@ import { Stack } from "expo-router";
 import { useEffect } from "react";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-//
 
 export default function RootLayout() {
 	return (
@@ -22,26 +21,29 @@ export default function RootLayout() {
 		</SafeAreaProvider>
 	);
 }
+
 function AppStack() {
 	const { token, setUser, setToken } = useUserContext();
-	const { data, refetch } = useMeQuery();
+	const [meQuery, { data }] = useLazyMeQuery();
+
 	useEffect(() => {
 		if (token) {
-			refetch();
-			AsyncStorage.setItem("token", token);
+			console.log("Token refetch", token);
+			AsyncStorage.setItem("token", token).then(() => {
+				meQuery();
+			});
 		}
 	}, [token]);
-
 	useEffect(() => {
 		if (data) {
 			setUser(data);
 		}
 	}, [data]);
-	//
 	useEffect(() => {
 		async function loadToken() {
 			const localToken = await AsyncStorage.getItem("token");
 			if (localToken) {
+				console.log("Loaded token", localToken);
 				setToken(localToken);
 			}
 		}

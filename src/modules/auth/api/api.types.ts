@@ -17,7 +17,7 @@ export interface RegisterCredentials {
     username: string,
     name: string, 
     surname: string,
-    avatar: string
+    avatar?: string | null
 }
 
 export type MeResponse = User;

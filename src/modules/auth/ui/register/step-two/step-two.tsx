@@ -33,6 +33,7 @@ export function StepTwo() {
 		try {
 			const response = await registerMutation(finalData).unwrap();
 			setToken(response.token);
+			console.log(response.token);
 		} catch (error) {
 			console.log(error);
 		}

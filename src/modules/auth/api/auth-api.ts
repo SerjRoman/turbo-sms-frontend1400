@@ -6,47 +6,56 @@ import {
 	RegisterCredentials,
 	RegisterResponse,
 } from "./api.types";
-
-const authApi = baseApi.injectEndpoints({
-	endpoints(builder) {
-		return {
-			login: builder.mutation<LoginResponse, LoginCredentials>({
-				query: (body) => ({
-					url: "/users/login",
-					body,
-					method: "POST",
-				}),
-			}),
-			register: builder.mutation<RegisterResponse, RegisterCredentials>({
-				query: (body) => {
-					const form = new FormData();
-					form.append("avatar", {
-						uri: body.avatar,
-						name: `${Date.now()}.jpeg`,
-						type: "image/jpeg",
-					} as any);
-					form.append("username", body.username);
-					form.append("name", body.name);
-					form.append("surname", body.surname);
-					form.append("email", body.email);
-					form.append("password", body.password);
-					return {
-						url: "/users/register",
+const authApi = baseApi
+	.enhanceEndpoints({ addTagTypes: ["User"] })
+	.injectEndpoints({
+		endpoints(builder) {
+			return {
+				login: builder.mutation<LoginResponse, LoginCredentials>({
+					query: (body) => ({
+						url: "/users/login",
 						body,
 						method: "POST",
-					};
-				},
-			}),
+					}),
+				}),
+				register: builder.mutation<
+					RegisterResponse,
+					RegisterCredentials
+				>({
+					query: (body) => {
+						const form = new FormData();
+						form.append("avatar", {
+							uri: body.avatar,
+							name: `${Date.now()}.jpeg`,
+							type: "image/jpeg",
+						} as any);
+						form.append("username", body.username);
+						form.append("name", body.name);
+						form.append("surname", body.surname);
+						form.append("email", body.email);
+						form.append("password", body.password);
+						return {
+							url: "/users/register",
+							body,
+							method: "POST",
+						};
+					},
+				}),
 
-			me: builder.query<MeResponse, void>({
-				query() {
-					return {
-						url: "users/me",
-					};
-				},
-			}),
-		};
-	},
-});
+				me: builder.query<MeResponse, void>({
+					query() {
+						return {
+							url: "users/me",
+						};
+					},
+				}),
+			};
+		},
+	});
 
-export const { useLoginMutation, useMeQuery, useRegisterMutation } = authApi;
+export const {
+	useLoginMutation,
+	useMeQuery,
+	useRegisterMutation,
+	useLazyMeQuery,
+} = authApi;
