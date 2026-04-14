@@ -1,10 +1,11 @@
 import { UserContextProvider, useUserContext } from "@modules/auth";
-import { useLazyMeQuery, useMeQuery } from "@modules/auth/api";
+import { useLazyMeQuery } from "@modules/auth/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ApiProvider } from "@reduxjs/toolkit/query/react";
 import { baseApi } from "@shared/api/base-api";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
+import { ActivityIndicator } from "react-native";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -24,13 +25,14 @@ export default function RootLayout() {
 
 function AppStack() {
 	const { token, setUser, setToken } = useUserContext();
-	const [meQuery, { data }] = useLazyMeQuery();
+	const [meQuery, { data, isSuccess }] = useLazyMeQuery();
+	const router = useRouter();
 
 	useEffect(() => {
 		if (token) {
 			console.log("Token refetch", token);
 			AsyncStorage.setItem("token", token).then(() => {
-				meQuery();
+				meQuery().unwrap();
 			});
 		}
 	}, [token]);
@@ -49,6 +51,10 @@ function AppStack() {
 		}
 		loadToken();
 	}, []);
+	useEffect(() => {
+		if (!isSuccess) return;
+		router.replace("/chats");
+	}, [isSuccess]);
 	return (
 		<Stack
 			screenOptions={{
@@ -57,6 +63,7 @@ function AppStack() {
 		>
 			<Stack.Screen name="index" />
 			<Stack.Screen name="(auth)" />
+			<Stack.Screen name="(tabs)" />
 		</Stack>
 	);
 }

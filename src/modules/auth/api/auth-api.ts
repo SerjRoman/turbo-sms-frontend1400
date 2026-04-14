@@ -26,7 +26,7 @@ const authApi = baseApi
 						const form = new FormData();
 						form.append("avatar", {
 							uri: body.avatar,
-							name: `${Date.now()}.jpeg`,
+							name: `${Date.now()}.jpg`,
 							type: "image/jpeg",
 						} as any);
 						form.append("username", body.username);
@@ -34,9 +34,10 @@ const authApi = baseApi
 						form.append("surname", body.surname);
 						form.append("email", body.email);
 						form.append("password", body.password);
+
 						return {
 							url: "/users/register",
-							body,
+							body: form,
 							method: "POST",
 						};
 					},

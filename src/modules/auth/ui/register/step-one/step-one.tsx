@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { type RegisterStepOneSchema } from "../../../models/types";
 import { View } from "react-native";
-import { Input, ICONS, Button } from "@shared/ui";
+import { Input, Icons, Button } from "@shared/ui";
 import { registerValidators } from "../../../models/validators";
 import { styles } from "./step-one.styles";
 import { useRouter } from "expo-router";
@@ -54,7 +54,7 @@ export function StepOne() {
 								style={styles.input}
 								onChangeText={field.onChange}
 								value={field.value}
-								iconLeft={<ICONS.MailIcon />}
+								iconLeft={<Icons.MailIcon />}
 								label="Email"
 								error={fieldState.error?.message}
 							/>
@@ -76,7 +76,7 @@ export function StepOne() {
 								style={styles.input}
 								onChangeText={field.onChange}
 								value={field.value}
-								iconLeft={<ICONS.UserIcon />}
+								iconLeft={<Icons.UserIcon />}
 								label="Username"
 								error={fieldState.error?.message}
 							/>

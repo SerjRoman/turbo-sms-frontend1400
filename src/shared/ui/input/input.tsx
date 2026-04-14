@@ -1,6 +1,6 @@
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { InputPasswordProps, InputProps } from "./input.types";
-import { ICONS } from "../icons";
+import { Icons } from "../icons";
 import { styles } from "./input.styles";
 import { useState } from "react";
 
@@ -25,7 +25,7 @@ export function Input(props: InputProps) {
 			</View>
 			{error && (
 				<View style={styles.errorContainer}>
-					<ICONS.ErrorIcon
+					<Icons.ErrorIcon
 						width={16}
 						height={16}
 						viewBox="0 0 16 16"
@@ -41,9 +41,9 @@ function Password(props: InputPasswordProps) {
 	const [isHidden, setIsHidden] = useState<boolean>(true);
 
 	const EyeIcon = isHidden ? (
-		<ICONS.EyeClosedIcon width={32} height={32} viewBox="0 0 32 32" />
+		<Icons.EyeClosedIcon width={32} height={32} viewBox="0 0 32 32" />
 	) : (
-		<ICONS.EyeOpenIcon width={32} height={32} viewBox="0 0 32 32" />
+		<Icons.EyeOpenIcon width={32} height={32} viewBox="0 0 32 32" />
 	);
 
 	function toggleVisibility() {
@@ -52,7 +52,7 @@ function Password(props: InputPasswordProps) {
 	return (
 		<Input
 			{...props}
-			iconLeft={<ICONS.KeyIcon />}
+			iconLeft={<Icons.KeyIcon />}
 			iconRight={
 				<TouchableOpacity onPress={toggleVisibility}>
 					{EyeIcon}

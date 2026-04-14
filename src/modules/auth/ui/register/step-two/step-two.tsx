@@ -5,7 +5,7 @@ import {
 	type RegisterStepTwoSchema,
 } from "../../../models/types";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
-import { Input, ICONS, Button } from "@shared/ui";
+import { Input, Icons, Button } from "@shared/ui";
 import { registerValidators } from "../../../models/validators";
 import { styles } from "./step-two.styles";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -18,6 +18,8 @@ export function StepTwo() {
 	const { setToken } = useUserContext();
 	const [registerMutation] = useRegisterMutation();
 	const params = useLocalSearchParams<RegisterStepOneSchema>();
+	const router = useRouter();
+
 	const { handleSubmit, control } = useForm({
 		// Если в валидации есть опциональные поля, то yupResolver будет криво с ними работать,
 		// поэтому НЕ указываем типизацию generic`ом для useForm
@@ -38,7 +40,6 @@ export function StepTwo() {
 			console.log(error);
 		}
 	}
-	const router = useRouter();
 
 	return (
 		<View style={styles.container}>
@@ -120,7 +121,7 @@ export function StepTwo() {
 									/>
 									{!field.value && (
 										<View style={styles.iconContainer}>
-											<ICONS.SearchIcon
+											<Icons.SearchIcon
 												width="100%"
 												height="100%"
 											/>

@@ -5,4 +5,5 @@ export const COLORS = {
 	transperentBlack: "rgba(0,0,0, 0.5)",
 	error: "#FF0000",
 	brownPrimary: "#733349",
+    grey: "#C8C8C8"
 };

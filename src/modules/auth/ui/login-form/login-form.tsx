@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { styles } from "./login-form.styles";
-import { Button, ICONS, Input } from "@shared/ui";
+import { Button, Icons, Input } from "@shared/ui";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginValidator } from "../../models/validators";
@@ -43,7 +43,7 @@ export function LoginForm() {
 								style={styles.input}
 								onChangeText={field.onChange}
 								value={field.value}
-								iconLeft={<ICONS.MailIcon />}
+								iconLeft={<Icons.MailIcon />}
 								label="Email"
 								error={fieldState.error?.message}
 							/>
