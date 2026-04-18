@@ -5,7 +5,6 @@ import {
 	type RegisterStepTwoSchema,
 } from "../../../models/types";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
-import { Input, Icons, Button } from "@shared/ui";
 import { registerValidators } from "../../../models/validators";
 import { styles } from "./step-two.styles";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -13,6 +12,9 @@ import { Image } from "expo-image";
 import { useRegisterMutation } from "../../../api";
 import { pickImage } from "@shared/tools/pick-image";
 import { useUserContext } from "../../../context/user.context";
+import { Input } from "@shared/ui/input";
+import { Button } from "@shared/ui/button";
+import { Icons } from "@shared/ui/icons";
 
 export function StepTwo() {
 	const { setToken } = useUserContext();

@@ -1,8 +1,10 @@
+import { HeaderChats } from "@modules/chat";
+import { HeaderContacts } from "@modules/contact";
+import { HeaderProfile } from "@modules/profile";
+import { HeaderSettings } from "@modules/settings";
 import { COLORS, FONT_SIZE } from "@shared/constants";
-import { Icons } from "@shared/ui";
+import { Icons } from "@shared/ui/icons";
 import { Tabs } from "expo-router";
-import { Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TabsLayout() {
 	return (
@@ -15,13 +17,6 @@ export default function TabsLayout() {
 					fontSize: FONT_SIZE.small,
 					color: COLORS.black,
 				},
-				header: () => {
-					return (
-						<SafeAreaView edges={["top"]}>
-							<Text>Header</Text>
-						</SafeAreaView>
-					);
-				},
 			}}
 		>
 			<Tabs.Screen
@@ -33,13 +28,7 @@ export default function TabsLayout() {
 						/>
 					),
 					tabBarLabel: "Contacts",
-					header: () => {
-						return (
-							<SafeAreaView edges={["top"]}>
-								<Text>Contacts</Text>
-							</SafeAreaView>
-						);
-					},
+					header: () => <HeaderContacts />,
 				}}
 			/>
 			<Tabs.Screen
@@ -51,13 +40,7 @@ export default function TabsLayout() {
 						/>
 					),
 					tabBarLabel: "Chats",
-					header: () => {
-						return (
-							<SafeAreaView edges={["top"]}>
-								<Text>Chats</Text>
-							</SafeAreaView>
-						);
-					},
+					header: () => <HeaderChats />,
 				}}
 			/>
 			<Tabs.Screen
@@ -69,6 +52,7 @@ export default function TabsLayout() {
 						/>
 					),
 					tabBarLabel: "Profile",
+					header: () => <HeaderProfile />,
 				}}
 			/>
 			<Tabs.Screen
@@ -79,9 +63,11 @@ export default function TabsLayout() {
 							fill={focused ? COLORS.grey : COLORS.black}
 						/>
 					),
+					header: () => <HeaderSettings />,
 					tabBarLabel: "Settings",
 				}}
 			/>
 		</Tabs>
 	);
 }
+// Сделай за 15 минут

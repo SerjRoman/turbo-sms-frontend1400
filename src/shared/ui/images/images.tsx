@@ -1,5 +1,5 @@
-import { LogoImage } from './_static-images/logo-image';
+import { LogoImage } from "./_static-images/logo-image";
 
-export const IMAGES = {
-    LogoImage
-}
+export const Images = {
+	LogoImage,
+};

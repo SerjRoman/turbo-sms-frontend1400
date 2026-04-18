@@ -1,1 +1,1 @@
-export { IMAGES } from "./images"
+export { Images } from "./images"

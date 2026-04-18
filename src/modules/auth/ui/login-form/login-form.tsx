@@ -1,12 +1,14 @@
 import { View } from "react-native";
 import { styles } from "./login-form.styles";
-import { Button, Icons, Input } from "@shared/ui";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginValidator } from "../../models/validators";
 import { type LoginSchema } from "../../models/types";
 import { useUserContext } from "../../context/user.context";
 import { useLoginMutation } from "../../api";
+import { Button } from "@shared/ui/button"
+import { Input } from "@shared/ui/input";
+import { Icons } from "@shared/ui/icons";
 
 export function LoginForm() {
 	const { setToken } = useUserContext();
