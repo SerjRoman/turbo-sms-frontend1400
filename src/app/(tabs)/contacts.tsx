@@ -1,3 +1,4 @@
+import { HeaderContacts } from "@modules/contact";
 import { View } from "react-native";
 
 export default function Contacts() {
