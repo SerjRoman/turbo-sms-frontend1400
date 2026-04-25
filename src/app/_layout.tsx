@@ -1,11 +1,13 @@
-import { UserContextProvider, useUserContext } from "@modules/auth";
-import { useLazyMeQuery } from "@modules/auth/api";
+import {
+	UserContextProvider,
+	useUserContext,
+	useLazyMeQuery,
+} from "@modules/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ApiProvider } from "@reduxjs/toolkit/query/react";
 import { baseApi } from "@shared/api/base-api";
 import { Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
-import { ActivityIndicator } from "react-native";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
