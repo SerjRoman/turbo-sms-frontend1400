@@ -3,11 +3,7 @@ import { Stack } from "expo-router";
 
 export default function ModalLayout() {
 	return (
-		<Stack
-			screenOptions={{
-				presentation: "containedModal",
-			}}
-		>
+		<Stack>
 			<Stack.Screen
 				name="create-contact/step-one"
 				options={{
@@ -18,7 +14,6 @@ export default function ModalLayout() {
 				name="create-contact/step-two"
 				options={{
 					header: () => <HeaderBack title="Create Contact" />,
-					presentation: "containedModal",
 				}}
 			/>
 		</Stack>

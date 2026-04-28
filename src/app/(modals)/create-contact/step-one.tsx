@@ -7,13 +7,25 @@ import { COLORS, FONT_SIZE } from "@shared/constants";
 import { useEffect, useState } from "react";
 import { useLazyGetUserByUsernameQuery } from "@modules/contact";
 import { apiMediaUrl } from "@shared/constants/api";
+import { useUserContext } from "@modules/auth";
+import { useRouter } from "expo-router";
 
 export default function CreateContactStepOne() {
+	const { user } = useUserContext();
+	const router = useRouter();
 	const [value, setValue] = useState<string>("");
-	const [getUser, { data, error }] = useLazyGetUserByUsernameQuery();
+	const [getUser, { data, error, reset, isSuccess, isFetching }] =
+		useLazyGetUserByUsernameQuery();
+	const isFoundMyself = user?.username === value;
 	useEffect(() => {
-		if (!value) return;
-		console.log(value);
+		if (!value) {
+			reset();
+			return;
+		}
+		if (isFoundMyself) {
+			reset();
+			return;
+		}
 		getUser(value);
 	}, [value]);
 	const isNotFound = error && "status" in error && error.status === 404;
@@ -27,26 +39,56 @@ export default function CreateContactStepOne() {
 				iconLeft={<Icons.SearchIcon placeholder="Search..." />}
 				value={value}
 				onChangeText={(txt) => setValue(txt)}
+				autoCapitalize="none"
 			/>
-			{data && (
+			{data && isSuccess && (
 				<View style={styles.userBlock}>
 					<Image
 						placeholder={require("@assets/default-user.png")}
 						placeholderContentFit="cover"
 						contentFit="cover"
 						style={styles.avatar}
-						source={`${apiMediaUrl}${data.avatar}`}
+						source={{
+							uri: data.avatar
+								? `${apiMediaUrl}${data.avatar}`
+								: undefined,
+						}}
 					/>
 					<Text style={styles.username}>{data.username}</Text>
 				</View>
 			)}
-			{isNotFound && (
-				<View>
+			{isFoundMyself ? (
+				<View style={styles.errorContainer}>
 					<Icons.ErrorIcon />
-					<Text>User not found</Text>
+					<Text style={styles.errorText}>
+						You cannot find yourself!
+					</Text>
 				</View>
+			) : (
+				isNotFound && (
+					<View style={styles.errorContainer}>
+						<Icons.ErrorIcon />
+						<Text style={styles.errorText}>User not found</Text>
+					</View>
+				)
 			)}
-			<Button title="Select" />
+			<Button
+				title="Select"
+				disabled={!isSuccess}
+				isLoading={isFetching}
+				onPress={() => {
+					if (!data) return;
+					router.push({
+						pathname: "/create-contact/step-two",
+						params: {
+							id: data.id,
+							avatar: data.avatar,
+							name: data.name,
+							surname: data.surname,
+						},
+					});
+				}}
+			/>
 		</View>
 	);
 }
@@ -83,5 +125,13 @@ const styles = StyleSheet.create({
 	username: {
 		textAlign: "center",
 		fontSize: FONT_SIZE.titleLarge,
+	},
+	errorContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+		gap: 6,
+	},
+	errorText: {
+		color: COLORS.error,
 	},
 });

@@ -6,3 +6,4 @@ export {
 	useGetUserByUsernameQuery,
 	useLazyGetUserByUsernameQuery,
 } from "./api";
+export { createContactSchema, type CreateContactT } from "./model";

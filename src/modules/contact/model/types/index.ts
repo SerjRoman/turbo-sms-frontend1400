@@ -1,0 +1,1 @@
+export type { CreateContactT } from "./create-contact.types"

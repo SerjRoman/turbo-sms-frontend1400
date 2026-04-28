@@ -32,7 +32,6 @@ function AppStack() {
 
 	useEffect(() => {
 		if (token) {
-			console.log("Token refetch", token);
 			AsyncStorage.setItem("token", token).then(() => {
 				meQuery().unwrap();
 			});
@@ -47,7 +46,6 @@ function AppStack() {
 		async function loadToken() {
 			const localToken = await AsyncStorage.getItem("token");
 			if (localToken) {
-				console.log("Loaded token", localToken);
 				setToken(localToken);
 			}
 		}
@@ -66,6 +64,10 @@ function AppStack() {
 			<Stack.Screen name="index" />
 			<Stack.Screen name="(auth)" />
 			<Stack.Screen name="(tabs)" />
+			<Stack.Screen
+				name="(modals)"
+				options={{ presentation: "containedModal" }}
+			/>
 		</Stack>
 	);
 }
