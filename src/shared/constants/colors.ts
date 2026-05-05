@@ -6,5 +6,6 @@ export const COLORS = {
 	error: "#FF0000",
 	brownPrimary: "#733349",
     grey: "#C8C8C8",
-    greyBacgkround: "#F5F5F5"
+    greyBacgkround: "#F5F5F5",
+	green: "#45F680"
 };
