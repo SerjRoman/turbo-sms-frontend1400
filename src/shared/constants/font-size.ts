@@ -5,4 +5,5 @@ export const FONT_SIZE = {
     titleLarge: 22,
 	headlineMedium: 28,
 	large: 32,
+	bodyLarge: 24,
 };

@@ -11,6 +11,7 @@ import { ContactsIcon } from "./_icons/contacts";
 import { ProfileIcon } from "./_icons/profile";
 import { BackIcon } from "./_icons/back";
 import { PlusIcon } from "./_icons/plus";
+import { ReadedIcon } from "./_icons/readed";
 
 export const Icons = {
 	ChatsIcon,
@@ -26,4 +27,5 @@ export const Icons = {
 	SettingsIcon,
 	BackIcon,
 	PlusIcon,
+	ReadedIcon,
 };

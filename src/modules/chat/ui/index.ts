@@ -1,3 +1,5 @@
 export { HeaderChat } from "./header-chat/header-chat";
 export { HeaderChats } from "./header-chats/header-chats";
-export { ChatList } from "./ChatList"
+export { ChatList } from "./ChatList";
+export { MessageList } from "./MessageList";
+export { MessageListItem } from "./MessageListItem";

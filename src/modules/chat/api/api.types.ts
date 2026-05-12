@@ -44,3 +44,35 @@ export type ChatWithContactInfo = Chat & {
 				isInContact: false;
 		  })
 	);
+
+export interface Message {
+	id: number;
+	type: string;
+	text: string | null;
+	mediaUrl: string | null;
+	chatAsLastMessageId: number;
+	createdAt: Date;
+	updatedAt: Date;
+	senderId: number;
+	chatId: number;
+}
+
+export type ChatWithParticipantInfoResponse = Chat & {
+	lastMessage: LastMessage | null;
+} & {
+	participants: [ChatUserInfo];
+};
+export interface CreateChatPayload {
+	contactUserId: number;
+}
+
+export interface PaginatedResponse {}
+
+export type PaginatedMessagesResponse = {
+	data: Message[];
+	meta: PaginatedResponse;
+};
+export interface MessagesPayload {
+	chatId: number;
+	page: number;
+}
