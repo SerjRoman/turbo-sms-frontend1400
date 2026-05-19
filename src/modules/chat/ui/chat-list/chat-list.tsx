@@ -1,6 +1,6 @@
 import { useGetAllContactsQuery } from "@modules/contact";
 import { ActivityIndicator, FlatList } from "react-native";
-import { ChatListItem } from "../ChatListItem";
+import { ChatListItem } from "./ChatListItem";
 import { styles } from "./chat-list.styles";
 
 export function ChatList() {

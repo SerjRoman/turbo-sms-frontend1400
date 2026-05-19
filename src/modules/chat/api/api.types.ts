@@ -1,3 +1,5 @@
+import { PaginatedResponse, PaginationParams } from "@shared/types";
+
 export interface LastMessage {
 	id: number;
 	chatId: number;
@@ -66,13 +68,7 @@ export interface CreateChatPayload {
 	contactUserId: number;
 }
 
-export interface PaginatedResponse {}
-
-export type PaginatedMessagesResponse = {
-	data: Message[];
-	meta: PaginatedResponse;
-};
-export interface MessagesPayload {
+export type PaginatedMessagesResponse = PaginatedResponse<Message>;
+export interface MessagesPayload extends PaginationParams {
 	chatId: number;
-	page: number;
 }
