@@ -2,10 +2,10 @@ import { baseApi } from "@shared/api/base-api";
 import {
 	CreateContactResponse,
 	CreateContactRequest,
-	GetMyContactsResponse,
 	GetContactByIdResponse,
 } from "./types";
 import { User } from "@modules/auth/models/types";
+import { ChatWithContactInfo } from "@modules/chat/api/api.types";
 
 const contactApi = baseApi.injectEndpoints({
 	endpoints(builder) {
@@ -20,7 +20,7 @@ const contactApi = baseApi.injectEndpoints({
 					method: "POST",
 				}),
 			}),
-			getAllContacts: builder.query<GetMyContactsResponse, void>({
+			getAllContacts: builder.query<ChatWithContactInfo[], void>({
 				query: () => "/contacts/",
 			}),
 

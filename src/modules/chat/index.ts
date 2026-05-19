@@ -1,1 +1,1 @@
-export { HeaderChat, HeaderChats } from "./ui";
+export { HeaderChat, HeaderChats, ChatList } from "./ui";

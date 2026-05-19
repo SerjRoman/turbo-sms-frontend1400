@@ -1,6 +1,5 @@
 import { User } from "../@x";
 
-// Ilya
 export type GetContactByIdRequest = {
 	id: number;
 };
