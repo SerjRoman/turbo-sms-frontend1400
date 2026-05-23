@@ -3,39 +3,55 @@ import {
 	CreateContactResponse,
 	CreateContactRequest,
 	GetContactByIdResponse,
+	GetMyContactsResponse,
 } from "./types";
 import { User } from "@modules/auth/models/types";
-import { ChatWithContactInfo } from "@modules/chat/api/api.types";
 
-const contactApi = baseApi.injectEndpoints({
-	endpoints(builder) {
-		return {
-			contactCreate: builder.mutation<
-				CreateContactResponse,
-				CreateContactRequest
-			>({
-				query: (body) => ({
-					url: "/contacts/",
-					body,
-					method: "POST",
+const contactApi = baseApi
+	.enhanceEndpoints({
+		addTagTypes: ["Contacts"],
+	})
+	.injectEndpoints({
+		endpoints(builder) {
+			return {
+				createContact: builder.mutation<
+					CreateContactResponse,
+					CreateContactRequest
+				>({
+					query: (body) => {
+						const form = new FormData();
+						form.append("avatar", {
+							uri: body.avatar,
+							name: `${Date.now()}.jpg`,
+							type: "image/jpeg",
+						} as any);
+						form.append("localName", body.localName);
+						form.append("contactUserId", `${body.contactUserId}`);
+						return {
+							url: "/contacts/",
+							body: form,
+							method: "POST",
+						};
+					},
+					invalidatesTags: ["Contacts"],
 				}),
-			}),
-			getAllContacts: builder.query<ChatWithContactInfo[], void>({
-				query: () => "/contacts/",
-			}),
+				getAllContacts: builder.query<GetMyContactsResponse, void>({
+					query: () => "/contacts/",
+					providesTags: ["Contacts"],
+				}),
 
-			getUserByUsername: builder.query<User, string>({
-				query: (username) => `/users/${username}`,
-			}),
+				getUserByUsername: builder.query<User, string>({
+					query: (username) => `/users/${username}`,
+				}),
 
-			getContactById: builder.query<GetContactByIdResponse, number>({
-				query: (id) => `/contacts/${id}`,
-			}),
-		};
-	},
-});
+				getContactById: builder.query<GetContactByIdResponse, number>({
+					query: (id) => `/contacts/${id}`,
+				}),
+			};
+		},
+	});
 export const {
-	useContactCreateMutation,
+	useCreateContactMutation,
 	useGetAllContactsQuery,
 	useGetContactByIdQuery,
 	useGetUserByUsernameQuery,

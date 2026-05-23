@@ -1,2 +1,2 @@
-export { createContactSchema } from "./validators"
-export type { CreateContactT } from "./types"
+export { createContactSchema } from "./validators";
+export type { CreateContactT, Contact } from "./types";

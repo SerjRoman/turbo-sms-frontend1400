@@ -1,34 +1,39 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./contact-list.styles";
 import { Image } from "expo-image";
 import { apiMediaUrl } from "@shared/constants/api";
-
-type Contacts = {
-	id: number;
-	localName: string;
-	avatar: string | null;
-};
+import type { Contact } from "../../model";
 
 type Props = {
-	contacts: Contacts[];
+	contacts: Contact[];
+	onItemPress?: (item: Contact) => void;
 };
 
-export function ContactList({ contacts }: Props) {
+export function ContactList({ contacts, onItemPress }: Props) {
 	return (
 		<FlatList
 			data={contacts}
 			keyExtractor={(item) => item.id.toString()}
-			renderItem={({ item }) => (
-				<View style={styles.itemContainer}>
-					<Image
-						source={`${apiMediaUrl}${item.avatar}`}
-						style={styles.avatar}
-					/>
-					<View style={styles.textContainer}>
-						<Text style={styles.name}>{item.localName}</Text>
-					</View>
-				</View>
-			)}
+			renderItem={({ item }) => {
+				return (
+					<TouchableOpacity
+						style={styles.itemContainer}
+						onPress={() => onItemPress?.(item)}
+					>
+						<Image
+							source={
+								item.avatar
+									? `${apiMediaUrl}${item.avatar}`
+									: ``
+							}
+							style={styles.avatar}
+						/>
+						<View style={styles.textContainer}>
+							<Text style={styles.name}>{item.localName}</Text>
+						</View>
+					</TouchableOpacity>
+				);
+			}}
 		/>
 	);
 }

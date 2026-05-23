@@ -16,22 +16,20 @@ export type GetContactByIdResponse = {
 export type GetMyContactsResponse = {
 	id: number;
 	localName: string;
-	avatar: null | string;
+	avatar: string | null;
 	addedAt: Date;
-	contactUser: User;
-	onwer: User;
+	contactUserId: number;
+	ownerId: number;
 }[];
 
 export type CreateContactResponse = {
-	name: string;
-	surname: string;
+	localName: string;
 	contactUserId: number;
 	avatar: null | string;
 };
 
 export type CreateContactRequest = {
-	name: string;
-	surname: string;
+	localName: string;
 	contactUserId: number;
 	avatar: null | string;
 };

@@ -5,13 +5,18 @@ import { useLocalSearchParams } from "expo-router";
 import { useForm, Controller } from "react-hook-form";
 import { View, StyleSheet, TouchableOpacity, Alert, Text } from "react-native";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { createContactSchema, CreateContactT } from "@modules/contact";
+import {
+	createContactSchema,
+	CreateContactT,
+	useCreateContactMutation,
+} from "@modules/contact";
 import { Button } from "@shared/ui/button";
 import { pickImage } from "@shared/tools/pick-image";
 import { Image } from "expo-image";
 import { apiMediaUrl } from "@shared/constants/api";
 
 export default function CreateContactSteTwo() {
+	const [createContact] = useCreateContactMutation();
 	const params = useLocalSearchParams<{
 		id: string;
 		name: string;
@@ -28,7 +33,17 @@ export default function CreateContactSteTwo() {
 		},
 	});
 	async function onSubmit(data: CreateContactT) {
-		console.log(data);
+		try {
+			await createContact({
+				localName: data.name + " " + data.surname,
+				avatar: data.avatar || null,
+				contactUserId: Number(params.id),
+			}).unwrap();
+			Alert.alert("Success", "Contact created successfully");
+		} catch (e) {
+			console.log(e);
+			Alert.alert("Error", "Failed to create contact");
+		}
 	}
 
 	return (

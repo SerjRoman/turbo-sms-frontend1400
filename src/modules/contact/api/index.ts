@@ -1,5 +1,5 @@
 export {
-	useContactCreateMutation,
+	useCreateContactMutation,
 	useGetAllContactsQuery,
 	useGetContactByIdQuery,
 	useGetUserByUsernameQuery,

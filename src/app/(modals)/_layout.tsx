@@ -16,6 +16,9 @@ export default function ModalLayout() {
 					header: () => <HeaderBack title="Create Contact" />,
 				}}
 			/>
+            <Stack.Screen name="create-chat" options={{
+                header: () => <HeaderBack title="Create Chat" />,
+            }}/>
 		</Stack>
 	);
 }

@@ -1,17 +1,17 @@
-import { useGetAllContactsQuery } from "@modules/contact";
-import { ActivityIndicator, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import { ChatListItem } from "./ChatListItem";
 import { styles } from "./chat-list.styles";
+import { ChatWithParticipantInfoResponse } from "../../api/api.types";
 
-export function ChatList() {
-	const { data, isLoading, isFetching } = useGetAllContactsQuery();
-	if (isLoading || isFetching) {
-		return <ActivityIndicator />;
-	}
+interface ChatListProps {
+	chats: ChatWithParticipantInfoResponse[];
+}
+
+export function ChatList({ chats }: ChatListProps) {
 	return (
 		<FlatList
-			data={data}
-			renderItem={({ item }) => <ChatListItem contact={item} />}
+			data={chats}
+			renderItem={({ item }) => <ChatListItem chat={item} />}
 			contentContainerStyle={styles.contentContainer}
 		/>
 	);

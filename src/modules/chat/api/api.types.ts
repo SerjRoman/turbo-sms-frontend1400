@@ -32,7 +32,7 @@ export type ChatWithContactInfo = Chat & {
 				participant: ChatUserInfo & {
 					contactOf: {
 						id: number;
-						avatar: string;
+						avatar: string | null;
 						localName: string;
 						addedAt: Date;
 					};
@@ -62,7 +62,23 @@ export interface Message {
 export type ChatWithParticipantInfoResponse = Chat & {
 	lastMessage: LastMessage | null;
 } & {
-	participants: [ChatUserInfo];
+	participants: [
+		{
+			user: ChatUserInfo & {
+				contactOf: [
+					{
+						id: number;
+						avatar: string | null;
+						localName: string;
+						addedAt: Date;
+					},
+				];
+			};
+		} & {
+			chatId: number;
+			userId: number;
+		},
+	];
 };
 export interface CreateChatPayload {
 	contactUserId: number;

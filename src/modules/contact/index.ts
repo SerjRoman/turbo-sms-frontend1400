@@ -1,6 +1,6 @@
-export { HeaderContacts } from "./ui";
+export { HeaderContacts, ContactList } from "./ui";
 export {
-	useContactCreateMutation,
+	useCreateContactMutation,
 	useGetAllContactsQuery,
 	useGetContactByIdQuery,
 	useGetUserByUsernameQuery,

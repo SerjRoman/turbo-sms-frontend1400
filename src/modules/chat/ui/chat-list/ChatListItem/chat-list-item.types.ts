@@ -1,5 +1,5 @@
-import { ChatWithContactInfo } from "../../api/api.types";
+import type { ChatWithContactInfo } from "../../../api/api.types";
 
 export interface ChatListItemProps {
-	contact: ChatWithContactInfo;
+	chat: ChatWithContactInfo;
 }

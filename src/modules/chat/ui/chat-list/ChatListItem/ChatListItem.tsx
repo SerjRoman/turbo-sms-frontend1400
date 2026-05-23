@@ -6,8 +6,9 @@ import { useUserContext } from "@modules/auth";
 
 export function ChatListItem(props: ChatListItemProps) {
 	const { user } = useUserContext();
-	const { contact } = props;
-	console.log(contact);
+	const { chat } = props;
+	const participant = chat.participant;
+	const isInContact = chat.isInContact;
 	return (
 		<TouchableOpacity
 			onPress={() => {
@@ -16,26 +17,23 @@ export function ChatListItem(props: ChatListItemProps) {
 			style={styles.container}
 		>
 			<View style={styles.avatarContainer}>
-				<Image
-					style={styles.avatar}
-					source={contact.participant.avatar}
-				/>
+				<Image style={styles.avatar} source={participant.avatar} />
 				<View
 					style={
 						// тут потрібно зробити перевірку на активність
-                        styles.activityIndicator
+						styles.activityIndicator
 					}
 				/>
 			</View>
 			<View style={styles.body}>
 				<Text style={styles.username}>
-					{contact.participant.surname} {contact.participant.name}
+					{participant.surname} {participant.name}
 				</Text>
-				{contact.lastMessage && (
+				{chat.lastMessage && (
 					<Text style={styles.lastMessage}>
-						{contact.lastMessage?.senderId === user?.id
-							? `You: ${contact.lastMessage.text}`
-							: `${contact.participant.surname} ${contact.participant.name}: ${contact.lastMessage.text}`}
+						{chat.lastMessage?.senderId === user?.id
+							? `You: ${chat.lastMessage.text}`
+							: `${participant.surname} ${participant.name}: ${chat.lastMessage.text}`}
 					</Text>
 				)}
 			</View>
