@@ -1,9 +1,6 @@
 import { baseApi, ClientSocket } from "@shared/api";
-import {
-	Message,
-	MessagesPayload,
-	PaginatedMessagesResponse,
-} from "./api.types";
+import { MessagesPayload, PaginatedMessagesResponse } from "./api.types";
+import { Message } from "../model";
 
 const messageApi = baseApi.injectEndpoints({
 	endpoints(build) {
@@ -13,7 +10,7 @@ const messageApi = baseApi.injectEndpoints({
 				MessagesPayload
 			>({
 				query: (arg) =>
-					`/messages/chat/${arg.chatId}?page=${arg.page}&take=${arg.take}`,
+					`/messages/chats/${arg.chatId}?page=${arg.page}&take=${arg.take}`,
 				async onCacheEntryAdded(arg, api) {
 					await api.cacheDataLoaded;
 
@@ -31,8 +28,12 @@ const messageApi = baseApi.injectEndpoints({
 				},
 				keepUnusedDataFor: 0,
 				forceRefetch: ({ currentArg, previousArg }) => {
-					return currentArg?.chatId !== previousArg?.chatId;
+					return currentArg !== previousArg;
 				},
+				merge: (currentCache, responseData) => {
+					currentCache.data.push(...responseData.data);
+				},
+				serializeQueryArgs: ({ queryArgs }) => queryArgs.chatId,
 			}),
 		};
 	},

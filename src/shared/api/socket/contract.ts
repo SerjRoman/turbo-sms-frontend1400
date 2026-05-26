@@ -4,8 +4,8 @@ interface Message {
 	text: string | null;
 	mediaUrl: string | null;
 	chatAsLastMessageId: number;
-	createdAt: Date;
-	updatedAt: Date;
+	createdAt: string;
+	updatedAt: string;
 	senderId: number;
 	chatId: number;
 }

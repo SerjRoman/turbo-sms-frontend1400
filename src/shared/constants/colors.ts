@@ -9,4 +9,5 @@ export const COLORS = {
 	grey: "#C8C8C8",
 	greyBacgkround: "#F5F5F5",
 	green: "#45F680",
+	red: "#F6454E"
 };

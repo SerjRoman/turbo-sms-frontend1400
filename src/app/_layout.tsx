@@ -91,6 +91,7 @@ function AppStack() {
 				name="(modals)"
 				options={{ presentation: "containedModal" }}
 			/>
+			<Stack.Screen name="chat" />
 		</Stack>
 	);
 }

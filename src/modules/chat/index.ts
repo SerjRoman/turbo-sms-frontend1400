@@ -1,2 +1,6 @@
 export { HeaderChat, HeaderChats, ChatList, MessageList } from "./ui";
-export { useGetAllChatsQuery, useCreateChatMutation } from "./api";
+export {
+	useGetAllChatsQuery,
+	useCreateChatMutation,
+	useGetMessagesQuery,
+} from "./api";

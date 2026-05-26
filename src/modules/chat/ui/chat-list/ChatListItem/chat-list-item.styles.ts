@@ -13,6 +13,8 @@ export const styles = StyleSheet.create({
 	avatarContainer: {
 		width: 50,
 		height: 50,
+	},
+	avatarContainerImg: {
 		borderRadius: "50%",
 		overflow: "hidden",
 	},
@@ -43,6 +45,12 @@ export const styles = StyleSheet.create({
 		height: 10,
 		width: 10,
 		borderRadius: "50%",
+		zIndex: 10,
+	},
+	onlineIndicator: {
 		backgroundColor: COLORS.green,
+	},
+	offlineIndicator: {
+		backgroundColor: COLORS.red,
 	},
 });

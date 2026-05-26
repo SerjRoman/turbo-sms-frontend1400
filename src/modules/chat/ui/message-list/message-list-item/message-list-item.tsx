@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import { Image } from "expo-image";
 import { styles } from "./message-list-item.styles";
 import { useUserContext } from "@modules/auth";
