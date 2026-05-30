@@ -12,6 +12,8 @@ import { ProfileIcon } from "./_icons/profile";
 import { BackIcon } from "./_icons/back";
 import { PlusIcon } from "./_icons/plus";
 import { ReadedIcon } from "./_icons/readed";
+import { PaperplaneIcon } from "./_icons/paperplane";
+import { PaperclipIcon } from "./_icons/paperclip";
 
 export const Icons = {
 	ChatsIcon,
@@ -28,4 +30,6 @@ export const Icons = {
 	BackIcon,
 	PlusIcon,
 	ReadedIcon,
+	PaperplaneIcon,
+	PaperclipIcon
 };

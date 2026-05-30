@@ -1,8 +1,8 @@
 interface Message {
 	id: number;
-	type: string;
+	type: "text" | "media";
 	text: string | null;
-	mediaUrl: string | null;
+	media: string | null;
 	chatAsLastMessageId: number;
 	createdAt: string;
 	updatedAt: string;
@@ -34,9 +34,9 @@ export interface ClientEvents {
 	) => void;
 }
 export type SendMessagePayload = {
-	type: "text" | "image";
+	type: "text" | "media";
 	text?: string | null;
-	mediaUrl?: string | null;
+	media?: string | null;
 	chatId: number;
 };
 

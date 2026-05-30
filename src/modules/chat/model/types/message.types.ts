@@ -3,7 +3,7 @@ export interface Message {
 	chatId: number;
 	type: string;
 	text: string | null;
-	mediaUrl: string | null;
+	media: string | null;
 	senderId: number;
 	chatAsLastMessageId: number;
 	createdAt: string;

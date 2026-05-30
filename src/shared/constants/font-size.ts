@@ -6,4 +6,5 @@ export const FONT_SIZE = {
 	headlineMedium: 28,
 	large: 32,
 	bodyLarge: 24,
+	bodySmall: 16
 };

@@ -5,11 +5,15 @@ import { useUserContext } from "@modules/auth";
 import { MessageListItemProps } from "./message-list-item.types";
 import { Icons } from "@shared/ui/icons";
 
-export function MessageListItem(props: MessageListItemProps) {
+export function MessageListItem(props: Readonly<MessageListItemProps>) {
 	const { user } = useUserContext();
 	const { message } = props;
+	const time = new Date(message.createdAt);
 	return (
-		<View style={styles.wrapper}>
+		<View style={[styles.wrapper,
+					 message.senderId === user?.id
+						? styles.authorWrapper
+						: styles.senderWrapper]}>
 			<View
 				style={[
 					styles.container,
@@ -19,14 +23,19 @@ export function MessageListItem(props: MessageListItemProps) {
 				]}
 			>
 				<View style={[styles.messageContent]}>
-					{message.mediaUrl ? (
-						<Image source={message.mediaUrl} />
+					{message.media ? (
+						<Image source={message.media} />
 					) : (
 						<Text style={styles.text}>{message.text}</Text>
 					)}
 				</View>
 				<View style={styles.timeContainer}>
-					<Text style={styles.time}>20:10</Text>
+					<Text style={styles.time}>
+						{time.toLocaleTimeString([], {
+							hour: "2-digit",
+							minute: "2-digit",
+						})}
+					</Text>
 					{message.senderId === user?.id && <Icons.ReadedIcon />}
 				</View>
 			</View>

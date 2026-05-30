@@ -1,4 +1,4 @@
-import { Message } from "../../api/api.types";
+import { Message } from '../../../model';
 
 export interface MessageListItemProps {
 	message: Message;

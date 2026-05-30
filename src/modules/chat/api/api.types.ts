@@ -1,4 +1,5 @@
 import { PaginatedResponse, PaginationParams } from "@shared/types";
+import { Message } from "../model";
 
 export interface LastMessage {
 	id: number;
@@ -76,3 +77,10 @@ export type PaginatedMessagesResponse = PaginatedResponse<Message>;
 export interface MessagesPayload extends PaginationParams {
 	chatId: number;
 }
+export type UploadMessageMediaPayload = {
+	media: string;
+};
+
+export type UploadMessageMediaResponse = {
+	media: string;
+};

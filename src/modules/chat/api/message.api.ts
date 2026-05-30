@@ -1,6 +1,11 @@
 import { baseApi, ClientSocket } from "@shared/api";
-import { MessagesPayload, PaginatedMessagesResponse } from "./api.types";
-import { Message } from "../model";
+import type {
+	MessagesPayload,
+	PaginatedMessagesResponse,
+	UploadMessageMediaPayload,
+	UploadMessageMediaResponse,
+} from "./api.types";
+import type { Message } from "../model";
 
 const messageApi = baseApi.injectEndpoints({
 	endpoints(build) {
@@ -35,8 +40,28 @@ const messageApi = baseApi.injectEndpoints({
 				},
 				serializeQueryArgs: ({ queryArgs }) => queryArgs.chatId,
 			}),
+			uploadMessageMedia: build.mutation<
+				UploadMessageMediaResponse,
+				UploadMessageMediaPayload
+			>({
+				query: (body) => {
+					const form = new FormData();
+					form.append("media", {
+						uri: body.media,
+						name: `${Date.now()}.jpg`,
+						type: "image/jpeg",
+					} as any);
+
+					return {
+						url: "/messages/media",
+						body: form,
+						method: "POST",
+					};
+				},
+			}),
 		};
 	},
 });
 
-export const { useGetMessagesQuery } = messageApi;
+export const { useGetMessagesQuery, useUploadMessageMediaMutation } =
+	messageApi;
