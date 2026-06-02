@@ -1,12 +1,17 @@
-import { MessageList, useGetMessagesQuery } from "@modules/chat";
+import {
+	MessageList,
+	useGetMessagesQuery,
+	MessageInputBlock,
+} from "@modules/chat";
 import { ClientSocket } from "@shared/api";
-import { MessageInputBlock } from "@modules/chat/ui";
-import { useLocalSearchParams } from "expo-router";
+import { Redirect, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
+import { useUserContext } from "@modules/auth";
 
 export default function ChatScreen() {
 	const params = useLocalSearchParams<{ chatId: string }>();
+	const { user } = useUserContext();
 	const [page, setPage] = useState<number>(1);
 	const chatId = Number(params.chatId);
 	const { data } = useGetMessagesQuery({ chatId, page, take: 20 }, {});
@@ -21,6 +26,9 @@ export default function ChatScreen() {
 			ClientSocket.emit("leaveChat", { chatId });
 		};
 	}, [chatId]);
+	if (!user) {
+		return <Redirect href={"/login"} />;
+	}
 	return (
 		<View style={{ flex: 1 }}>
 			<MessageList
@@ -28,8 +36,9 @@ export default function ChatScreen() {
 				handleLoadMore={() => {
 					setPage((prev) => prev + 1);
 				}}
+				userId={user.id}
 			/>
-			<MessageInputBlock chatId = {chatId}/>
+			<MessageInputBlock chatId={chatId} />
 		</View>
 	);
 }

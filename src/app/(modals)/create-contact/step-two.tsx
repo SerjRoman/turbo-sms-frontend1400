@@ -13,7 +13,7 @@ import {
 import { Button } from "@shared/ui/button";
 import { pickImage } from "@shared/tools/pick-image";
 import { Image } from "expo-image";
-import { apiMediaUrl } from "@shared/constants/api";
+import { apiMediaThumbnailUrl } from "@shared/constants/api";
 
 export default function CreateContactSteTwo() {
 	const [createContact] = useCreateContactMutation();
@@ -110,7 +110,7 @@ export default function CreateContactSteTwo() {
 									source={{
 										uri: field.value?.includes("file:")
 											? field.value
-											: `${apiMediaUrl}${field.value}`,
+											: `${apiMediaThumbnailUrl}${field.value}`,
 									}}
 								/>
 								{!field.value && (

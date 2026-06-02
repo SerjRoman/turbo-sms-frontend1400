@@ -6,21 +6,27 @@ export const styles = StyleSheet.create({
 		padding: 5,
 		backgroundColor: COLORS.bisquePrimary,
 		flexDirection: "row",
-		width: "100%",
-        justifyContent: "space-between"
+		alignItems: "center",
 	},
 	inputButton: {
 		width: 40,
 		height: 40,
+		alignItems: "center",
+		justifyContent: "center",
 	},
-	input: {
+	inputContainer: {
 		flexDirection: "row",
 		flex: 1,
-        width: "100%",
 		backgroundColor: COLORS.grey,
-		padding: 5,
 		borderRadius: 10,
 		maxHeight: 200,
+		height: 40,
+	},
+	mediaBlock: {
+		flex: 1,
+		height: 40,
+	},
+	input: {
 		fontSize: FONT_SIZE.bodyLarge,
 		fontWeight: 400,
 		color: COLORS.black,

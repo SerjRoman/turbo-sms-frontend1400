@@ -1,7 +1,7 @@
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./contact-list.styles";
 import { Image } from "expo-image";
-import { apiMediaUrl } from "@shared/constants/api";
+import { apiMediaThumbnailUrl } from "@shared/constants/api";
 import type { Contact } from "../../model";
 
 type Props = {
@@ -23,7 +23,7 @@ export function ContactList({ contacts, onItemPress }: Props) {
 						<Image
 							source={
 								item.avatar
-									? `${apiMediaUrl}${item.avatar}`
+									? `${apiMediaThumbnailUrl}${item.avatar}`
 									: ``
 							}
 							style={styles.avatar}

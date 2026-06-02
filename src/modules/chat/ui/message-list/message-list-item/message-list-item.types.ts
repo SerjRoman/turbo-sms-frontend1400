@@ -1,5 +1,11 @@
-import { Message } from '../../../model';
+import { Message } from "../../../model";
 
-export interface MessageListItemProps {
+interface MessageItemProps {
 	message: Message;
+	userId: number;
 }
+
+export interface MessageListItemProps extends MessageItemProps {}
+
+export interface MediaMessageItemProps extends MessageItemProps {}
+export interface TextMessageItemProps extends MessageItemProps {}

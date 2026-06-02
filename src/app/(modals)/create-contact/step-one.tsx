@@ -6,7 +6,7 @@ import { Image } from "expo-image";
 import { COLORS, FONT_SIZE } from "@shared/constants";
 import { useEffect, useState } from "react";
 import { useLazyGetUserByUsernameQuery } from "@modules/contact";
-import { apiMediaUrl } from "@shared/constants/api";
+import { apiMediaThumbnailUrl } from "@shared/constants/api";
 import { useUserContext } from "@modules/auth";
 import { useRouter } from "expo-router";
 
@@ -50,7 +50,7 @@ export default function CreateContactStepOne() {
 						style={styles.avatar}
 						source={{
 							uri: data.avatar
-								? `${apiMediaUrl}${data.avatar}`
+								? `${apiMediaThumbnailUrl}${data.avatar}`
 								: undefined,
 						}}
 					/>

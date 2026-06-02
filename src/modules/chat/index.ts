@@ -1,4 +1,10 @@
-export { HeaderChat, HeaderChats, ChatList, MessageList } from "./ui";
+export {
+	HeaderChat,
+	HeaderChats,
+	ChatList,
+	MessageList,
+	MessageInputBlock,
+} from "./ui";
 export {
 	useGetAllChatsQuery,
 	useCreateChatMutation,

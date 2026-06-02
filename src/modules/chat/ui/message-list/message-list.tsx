@@ -6,14 +6,21 @@ import { styles } from "./message-list.styles";
 interface MessageListProps {
 	messages: Message[];
 	handleLoadMore?: () => void;
+	userId: number;
 }
 
-export function MessageList({ messages, handleLoadMore }: Readonly<MessageListProps>) {
+export function MessageList({
+	messages,
+	handleLoadMore,
+	userId,
+}: Readonly<MessageListProps>) {
 	return (
 		<FlatList
 			data={messages}
-			renderItem={({ item }) => <MessageListItem message={item} />}
-			contentContainerStyle={styles.contentContainer}
+			renderItem={({ item }) => (
+				<MessageListItem message={item} userId={userId} />
+			)}
+			keyExtractor={({ id }) => `${id}`}
 			inverted
 			onEndReached={handleLoadMore}
 			onEndReachedThreshold={0.2}

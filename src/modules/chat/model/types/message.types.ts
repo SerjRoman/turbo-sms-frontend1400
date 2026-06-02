@@ -1,7 +1,7 @@
 export interface Message {
 	id: number;
 	chatId: number;
-	type: string;
+	type: "media" | "text";
 	text: string | null;
 	media: string | null;
 	senderId: number;

@@ -3,7 +3,7 @@ import { ChatListItemProps } from "./chat-list-item.types";
 import { Image } from "expo-image";
 import { styles } from "./chat-list-item.styles";
 import { useRouter } from "expo-router";
-import { apiMediaUrl } from "@shared/constants/api";
+import { apiMediaThumbnailUrl } from "@shared/constants/api";
 
 export function ChatListItem(props: ChatListItemProps) {
 	const { chat, isMyMessage, isUserOnline } = props;
@@ -15,8 +15,8 @@ export function ChatListItem(props: ChatListItemProps) {
 		? chat.participant.contactOf.localName
 		: `${participant.surname} ${participant.name}`;
 	const avatar = chat.isInContact
-		? `${apiMediaUrl}${chat.participant.contactOf.avatar}`
-		: `${apiMediaUrl}${chat.participant.avatar}`;
+		? `${apiMediaThumbnailUrl}${chat.participant.contactOf.avatar}`
+		: `${apiMediaThumbnailUrl}${chat.participant.avatar}`;
 	const isOnline = isUserOnline(participant.id);
 	const router = useRouter();
 	return (
@@ -44,8 +44,8 @@ export function ChatListItem(props: ChatListItemProps) {
 				{chat.lastMessage && (
 					<Text style={styles.lastMessage}>
 						{isMyMessageFlag
-							? `You: ${chat.lastMessage.text?.slice(0, 20)}`
-							: `${fullname}: ${chat.lastMessage.text?.slice(0, 20)}`}
+							? `You: ${chat.lastMessage.type === "text" ? chat.lastMessage.text?.slice(0, 20) : "Image"}`
+							: `${fullname}: ${chat.lastMessage.type === "text" ? chat.lastMessage.text?.slice(0, 20) : "Image"}`}
 					</Text>
 				)}
 			</View>
