@@ -22,7 +22,15 @@ export function ChatListItem(props: ChatListItemProps) {
 	return (
 		<TouchableOpacity
 			onPress={() => {
-				router.push(`/chat/${chat.id}`);
+				router.push({
+					pathname: `/chat/[chatId]`,
+					params: {
+						chatId: chat.id,
+						userId: participant.id,
+						fullname,
+						avatar,
+					},
+				});
 			}}
 			style={styles.container}
 		>

@@ -1,12 +1,11 @@
 import { useUserContext } from "@modules/auth";
 import { ChatList, useGetAllChatsQuery } from "@modules/chat";
-import { ClientSocket } from "@shared/api";
-import { useIsFocused } from "expo-router";
+import { ClientSocket, UserStatus } from "@shared/api";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 
 export default function Chats() {
-	const { data, isFetching } = useGetAllChatsQuery(undefined, {
+	const { data } = useGetAllChatsQuery(undefined, {
 		pollingInterval: 5000,
 	});
 	const { user } = useUserContext();
@@ -17,16 +16,44 @@ export default function Chats() {
 		return senderId === user?.id;
 	};
 
-	const isFocused = useIsFocused();
 	useEffect(() => {
 		if (!data) return;
 		const userIds = data.map((chat) => {
 			return chat.participant.id;
 		});
-		ClientSocket.emit("getOnlineUsers", userIds, (response) => {
-			setOnlineUserIds(new Set(response.userIds));
-		});
-	}, [isFocused, data, isFetching]);
+		ClientSocket.emit(
+			"subscribeAndGetInitialStatuses",
+			userIds,
+			(response) => {
+				setOnlineUserIds((prev) => {
+					const newState = new Set(prev);
+					for (const status of response.statuses) {
+						if (status.status === "online")
+							newState.add(status.userId);
+					}
+
+					return newState;
+				});
+			},
+		);
+	}, [data]);
+	useEffect(() => {
+		function handleUserStatusUpdated(status: UserStatus) {
+			setOnlineUserIds((prev) => {
+				const newState = new Set(prev);
+				if (status.status === "online") {
+					newState.add(status.userId);
+				} else {
+					newState.delete(status.userId);
+				}
+				return newState;
+			});
+		}
+		ClientSocket.on("userStatusUpdated", handleUserStatusUpdated);
+		return () => {
+			ClientSocket.off("userStatusUpdated", handleUserStatusUpdated);
+		};
+	}, []);
 	return (
 		<View style={{ flex: 1 }}>
 			<ChatList
