@@ -19,10 +19,16 @@ export interface LeaveChatPayload {
 export type GetOnlineUsersAcknowlegment = (response: {
 	userIds: number[];
 }) => void;
-
+export interface UserStatus {
+	userId: number;
+	status: "online" | "offline";
+}
 export type JoinChatCallback = (
 	response: { status: "ok" } | { status: "error"; message?: string },
 ) => void;
+export type SubscribeAndGetInitialStatusesAcknowlegment = (response: {
+	statuses: UserStatus[];
+}) => void;
 
 export interface ClientEvents {
 	joinChat: (data: JoinChatPayload, ack?: JoinChatCallback) => void;
@@ -31,6 +37,10 @@ export interface ClientEvents {
 	getOnlineUsers: (
 		userIds: number[],
 		ack?: GetOnlineUsersAcknowlegment,
+	) => void;
+	subscribeAndGetInitialStatuses: (
+		userIds: number[],
+		ack?: SubscribeAndGetInitialStatusesAcknowlegment,
 	) => void;
 }
 export type SendMessagePayload = {
@@ -42,4 +52,5 @@ export type SendMessagePayload = {
 
 export interface ServerEvents {
 	newChatMessage: (data: Message) => void;
+	userStatusUpdated: (status: UserStatus) => void;
 }

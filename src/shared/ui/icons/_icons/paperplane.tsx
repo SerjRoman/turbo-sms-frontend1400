@@ -1,7 +1,7 @@
 import Svg, { Path, SvgProps } from "react-native-svg"
 
 
-export function PaperplaneIcon(props: Readonoly<SvgProps>) {
+export function PaperplaneIcon(props: Readonly<SvgProps>) {
     return (
         <Svg
             width={30}
