@@ -9,6 +9,15 @@ interface Message {
 	senderId: number;
 	chatId: number;
 }
+export type ChatWithLastMessage = {
+	id: number;
+	lastMessageId: number | null;
+	lastMessage: Message | null;
+};
+export type ChatUpdatePayload = ChatWithLastMessage & {
+	senderId: number;
+	senderFullname: string;
+};
 
 export interface JoinChatPayload {
 	chatId: number;
@@ -53,4 +62,5 @@ export type SendMessagePayload = {
 export interface ServerEvents {
 	newChatMessage: (data: Message) => void;
 	userStatusUpdated: (status: UserStatus) => void;
+	chatUpdate: (data: ChatUpdatePayload) => void;
 }

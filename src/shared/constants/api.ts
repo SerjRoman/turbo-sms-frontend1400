@@ -1,4 +1,4 @@
-export const apiUrl = "http://192.168.1.27:8000/";
-export const apiMediaThumbnailUrl = "http://192.168.1.27:8000/media/thumbnail/";
-export const apiMediaOriginalUrl = "http://192.168.1.27:8000/media/original/";
-export const wsUrl = "ws://192.168.1.27:8000/";
+export const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+export const apiMediaThumbnailUrl = apiUrl + "media/thumbnail/";
+export const apiMediaOriginalUrl = apiUrl + "media/original/";
+export const wsUrl = process.env.EXPO_PUBLIC_WS_URL;
