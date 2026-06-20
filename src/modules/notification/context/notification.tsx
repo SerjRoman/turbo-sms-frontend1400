@@ -11,7 +11,7 @@ import {
 } from "../model";
 import { ChatUpdatePayload, ClientSocket } from "@shared/api";
 import { setNotificationHandler } from "expo-notifications";
-// import { useUserContext } from "@modules/auth";
+import { useUserContext } from "@modules/auth";
 
 setNotificationHandler({
 	handleNotification: async () => {
@@ -37,7 +37,7 @@ export function useNotificationContext() {
 }
 
 export function NotificationProvider({ children }: PropsWithChildren) {
-	// const { user } = useUserContext();
+	const { user } = useUserContext();
 	const [activeChatId, setActiveChatId] = useState<number | null>(null);
 	useEffect(() => {
 		async function requestPermission() {
@@ -47,11 +47,11 @@ export function NotificationProvider({ children }: PropsWithChildren) {
 				console.log(error);
 			}
 		}
-        requestPermission()
+		requestPermission();
 	}, []);
 	useEffect(() => {
 		function handleChatUpdate(chat: ChatUpdatePayload) {
-			if (activeChatId === chat.id) return;
+			if (activeChatId === chat.id || user?.id === chat.senderId) return;
 			const { lastMessage } = chat;
 			const messageText =
 				(lastMessage?.type === "text"

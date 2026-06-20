@@ -35,19 +35,7 @@
 		"web": {
 			"favicon": "./assets/favicon.png"
 		},
-		"plugins": [
-			"expo-image",
-			"expo-router",
-			"expo-notifications",
-			[
-				"expo-build-properties",
-				{
-					"android": {
-						"ndkVersion": "26.1.10909125"
-					}
-				}
-			]
-		],
+		"plugins": ["expo-image", "expo-router", "expo-notifications"],
 		"scheme": "turbo-sms-scheme",
 		"experiments": {
 			"typedRoutes": true

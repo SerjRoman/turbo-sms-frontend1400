@@ -1,9 +1,10 @@
 import { HeaderChats } from "@modules/chat";
 import { HeaderContacts } from "@modules/contact";
 import { HeaderProfile } from "@modules/profile";
-import { HeaderSettings } from "@modules/settings";
 import { COLORS, FONT_SIZE } from "@shared/constants";
+import { Header } from "@shared/ui/header";
 import { Icons } from "@shared/ui/icons";
+import { Images } from "@shared/ui/images";
 import { Tabs } from "expo-router";
 
 export default function TabsLayout() {
@@ -63,11 +64,21 @@ export default function TabsLayout() {
 							fill={focused ? COLORS.grey : COLORS.black}
 						/>
 					),
-					header: () => <HeaderSettings />,
+					header: () => {
+						return (
+							<Header
+								left={
+									<Images.LogoImage
+										style={{ width: 40, height: 40 }}
+									/>
+								}
+								title="Settings"
+							/>
+						);
+					},
 					tabBarLabel: "Settings",
 				}}
 			/>
 		</Tabs>
 	);
 }
-// Сделай за 15 минут
