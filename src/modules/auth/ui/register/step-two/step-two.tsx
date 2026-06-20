@@ -55,6 +55,7 @@ export function StepTwo() {
 								placeholder="Your name"
 								inputMode="text"
 								autoCapitalize="none"
+								placeholderTextColor={"black"}
 								autoComplete="off"
 								autoCorrect={false}
 								inputContainerStyle={styles.inputContainer}
@@ -75,6 +76,7 @@ export function StepTwo() {
 								placeholder="Your surname"
 								inputMode="text"
 								autoCapitalize="none"
+								placeholderTextColor={"black"}
 								autoComplete="off"
 								autoCorrect={false}
 								inputContainerStyle={styles.inputContainer}

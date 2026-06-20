@@ -6,7 +6,7 @@ import { loginValidator } from "../../models/validators";
 import { type LoginSchema } from "../../models/types";
 import { useUserContext } from "../../context/user.context";
 import { useLoginMutation } from "../../api";
-import { Button } from "@shared/ui/button"
+import { Button } from "@shared/ui/button";
 import { Input } from "@shared/ui/input";
 import { Icons } from "@shared/ui/icons";
 
@@ -37,6 +37,7 @@ export function LoginForm() {
 						return (
 							<Input
 								placeholder="Your email"
+								placeholderTextColor={"black"}
 								inputMode="email"
 								autoCapitalize="none"
 								autoComplete="off"
@@ -59,6 +60,7 @@ export function LoginForm() {
 						return (
 							<Input.Password
 								placeholder="Your password"
+								placeholderTextColor={"black"}
 								inputMode="text"
 								autoCapitalize="none"
 								autoComplete="off"

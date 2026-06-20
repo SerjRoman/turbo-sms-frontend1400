@@ -51,6 +51,7 @@ export function StepOne() {
 								placeholder="Your email"
 								inputMode="email"
 								autoCapitalize="none"
+								placeholderTextColor={"black"}
 								autoComplete="off"
 								autoCorrect={false}
 								inputContainerStyle={styles.inputContainer}
@@ -73,6 +74,7 @@ export function StepOne() {
 								placeholder="Your username"
 								inputMode="text"
 								autoCapitalize="none"
+								placeholderTextColor={"black"}
 								autoComplete="off"
 								autoCorrect={false}
 								inputContainerStyle={styles.inputContainer}
@@ -95,6 +97,7 @@ export function StepOne() {
 								placeholder="Your password"
 								inputMode="text"
 								autoCapitalize="none"
+								placeholderTextColor={"black"}
 								autoComplete="off"
 								autoCorrect={false}
 								inputContainerStyle={styles.inputContainer}
